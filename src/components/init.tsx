@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 import { AppPage } from "../pages/app-page";
 import ErrorPage from "../error-page";
 import { CreatePage } from "../pages/create-page";
@@ -7,7 +7,7 @@ import { UpdatePage } from "../pages/update-page";
 import { useEffect } from "react";
 import { useNewsStore } from "../store/store";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <AppPage />,
@@ -36,8 +36,8 @@ export const Init = () => {
     const savedNews = localStorage.getItem("news");
     if (savedNews) {
       setNews(JSON.parse(savedNews));
-      setIsInit(true);
     }
+    setIsInit(true);
   }, [setNews, setIsInit]);
 
   return isInit ? <RouterProvider router={router} /> : null;
